@@ -1,10 +1,11 @@
 class RestaurantsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    @restaurants = Restaurant.all
+    @restaurants = current_user.restaurants.all
   end
 
   def show
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = current_user.restaurants.find(params[:id])
   end
 
   def new
@@ -12,7 +13,7 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant = current_user.restaurants.new(restaurant_params)
     if @restaurant.save
       redirect_to @restaurant
     else
@@ -21,11 +22,11 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = current_uster.restaurants.find(params[:id])
   end
 
   def update
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = current_user.restaurants.find(params[:id])
 
     if @restaurant.update(restaurant_params)
       redirect_to @restaurant
@@ -35,7 +36,7 @@ class RestaurantsController < ApplicationController
   end
 
   def destroy
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = current_user.restaurants.find(params[:id])
     @restaurant.destroy
     redirect_to restaurants_path, notice: "Your restaurant has been deleted!"
   end

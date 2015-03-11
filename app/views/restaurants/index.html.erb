@@ -1,20 +1,19 @@
 <h1>List of Restaurants</h1>
 
+<% if notice %><div class="alert alert-info"><%= notice %></div><% end %>
+<% if notice %><div class="alert alert-warning"><%= alert %></div><% end %>
+<br>
 <%= link_to 'New Restaurant', new_restaurant_path %>
 <table>
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th>Address</th>
-    <th>Phone</th>
   </tr>
 
   <% @restaurants.each do |r| %>
     <tr>
       <td><%= r.name %></td>
       <td><%= r.description %></td>
-      <td><%= r.full_address %></td>
-      <td><%= r.phone %></td>
       <td><%= link_to "Show", restaurant_path(r) %></td>
       <td><%= link_to "Edit", edit_restaurant_path(r) %> <%= link_to "Delete", r, :confirm => "Are you sure?", :method => :delete %>
     </tr>
