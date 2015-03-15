@@ -22,7 +22,7 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
-    @restaurant = current_uster.restaurants.find(params[:id])
+    @restaurant = current_user.restaurants.find(params[:id])
   end
 
   def update

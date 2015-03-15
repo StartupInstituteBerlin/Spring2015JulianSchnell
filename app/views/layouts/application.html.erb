@@ -7,16 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= render 'shared/navigation' %>
 
-<% if user_signed_in? %>
-  <%= link_to "Settings", edit_user_registration_path %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "Log in", new_user_session_path %>
-  <%= link_to "Sign Up", new_user_registration_path %>
-<% end %>
-
-<%= yield %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <% if notice %><div class="alert alert-info"><%= notice %></div><% end %>
+      <% if notice %><div class="alert alert-warning"><%= alert %></div><% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-1">
+    <!-- left container -->
+    </div>
+    <div class="col-xs-6">
+      <%= yield %>
+    </div>
+    <div class="col-xs-5">
+      <!-- right container -->
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
