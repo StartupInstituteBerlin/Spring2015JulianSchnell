@@ -1,0 +1,17 @@
+<%= form_for @reservation do |res| %>
+  <p>
+    <%= res.label :email %><br />
+    <%= res.text_field :email %>
+  </p>
+  <p>
+    <%= res.label :date %><br />
+    <%= res.datetime_select :date %>
+  </p>
+
+  <p>
+    <%= res.label :message %><br />
+    <%= res.text_area :msg %>
+  </p>
+  <%= res.hidden_field :restaurant_id %>
+  <p><%= res.submit "Submit" %></p>
+<% end %>
