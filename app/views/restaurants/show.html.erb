@@ -18,5 +18,9 @@
     <td><%= @restaurant.phone %></td>
   </tr>
 </table>
+
+<div id="map">
+  <img src="https://maps.googleapis.com/maps/api/staticmap?size=240x240&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=restaurant%257C996600%7C224<%= @restaurant.full_address %>">
+</div>
 <%= link_to 'Back', restaurants_path %>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %>

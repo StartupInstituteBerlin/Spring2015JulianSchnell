@@ -1,11 +1,19 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
   def index
-    @restaurants = current_user.restaurants.all
+    if user_signed_in?
+      @restaurants = current_user.restaurants.all
+    else
+      @restaurants = Restaurant.all
+    end
   end
 
   def show
-    @restaurant = current_user.restaurants.find(params[:id])
+    if user_signed_in?
+      @restaurant = current_user.restaurants.find(params[:id])
+    else
+      @restaurant = Restaurant.find(params[:id])
+    end
   end
 
   def new
@@ -22,6 +30,8 @@ class RestaurantsController < ApplicationController
   end
 
   def edit
+    puts current_user
+    puts params[:id]
     @restaurant = current_user.restaurants.find(params[:id])
   end
 

@@ -1,6 +1,9 @@
 <h1>List of Restaurants</h1>
+<% if current_user %>
+  <%= link_to 'New Restaurant', new_restaurant_path %>
+  <%= link_to 'Show all reservations', reservations_path %>
+<% end %>
 
-<%= link_to 'New Restaurant', new_restaurant_path %>
 <table>
   <tr>
     <th>Name</th>
@@ -12,7 +15,11 @@
       <td><%= r.name %></td>
       <td><%= r.description %></td>
       <td><%= link_to "Show", restaurant_path(r) %></td>
-      <td><%= link_to "Edit", edit_restaurant_path(r) %> <%= link_to "Delete", r, :confirm => "Are you sure?", :method => :delete %>
+      <% if current_user %>
+        <td><%= link_to "Edit", edit_restaurant_path(r) %></td>
+        <td><%= link_to "Delete", r, :confirm => "Are you sure?", :method => :delete %></td>
+      <% end %>
+
     </tr>
   <% end %>
   </table>
