@@ -18,13 +18,14 @@
     <td><%= @restaurant.phone %></td>
   </tr>
 </table>
+
 <% if current_user && !@has_rating %>
 <div id="ratings">
-  <%= link_to "rate 1", rate_restaurant_path(@restaurant, 1), class: "rating_btn btn btn_success" %>
-  <%= link_to "rate 2", rate_restaurant_path(@restaurant, 2), class: "rating_btn btn btn_success" %>
-  <%= link_to "rate 3", rate_restaurant_path(@restaurant, 3), class: "rating_btn btn btn_success" %>
-  <%= link_to "rate 4", rate_restaurant_path(@restaurant, 4), class: "rating_btn btn btn_success" %>
-  <%= link_to "rate 5", rate_restaurant_path(@restaurant, 5), class: "rating_btn btn btn_success" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 1), class: "rating_btn glyphicon glyphicon-star" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 2), class: "rating_btn glyphicon glyphicon-star" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 3), class: "rating_btn glyphicon glyphicon-star" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 4), class: "rating_btn glyphicon glyphicon-star" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 5), class: "rating_btn glyphicon glyphicon-star" %>
 </div>
 <% end %>
 <% if @has_rating %>

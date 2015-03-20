@@ -22,7 +22,6 @@ class RestaurantsController < ApplicationController
   def show
     if user_signed_in?
       @restaurant = current_user.restaurants.find(params[:id])
-
     else
       @restaurant = Restaurant.find(params[:id])
     end
