@@ -2,7 +2,7 @@ class CreateReservations < ActiveRecord::Migration
   def change
     create_table :reservations do |t|
       t.string :email
-      t.string :date
+      t.datetime :reservation_date
       t.text :msg
       t.timestamps null: false
     end

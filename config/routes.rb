@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'restaurants#index'
   authenticated :user do
     root to: 'restaurants#index', as: :authenticated_root
+
+  get '/restaurants/:restaurant_id/rating/:value' => "restaurants#rating", as: :rate_restaurant
   end
 end

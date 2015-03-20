@@ -1,5 +1,14 @@
 class RestaurantsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
+
+  def rating
+    Rating.create(
+      restaurant_id: params[:restaurant_id],
+      user_id: current_user.id,
+      value: params[:value])
+  end
+
+
   def index
     if user_signed_in?
       @restaurants = current_user.restaurants.all
@@ -13,6 +22,7 @@ class RestaurantsController < ApplicationController
       @restaurant = current_user.restaurants.find(params[:id])
     else
       @restaurant = Restaurant.find(params[:id])
+      @has_rating = Rating.where(restaurant_id: @restaurant.id, user_id: current_user.id).exists?
     end
   end
 

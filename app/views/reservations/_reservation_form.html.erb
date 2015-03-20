@@ -4,8 +4,8 @@
     <%= res.text_field :email %>
   </p>
   <p>
-    <%= res.label :date %><br />
-    <%= res.datetime_select :date %>
+    <%= res.label :reservation_date %><br />
+    <%= res.datetime_select :reservation_date, start_year: 2015, end_year: 2016, start_hour: 12, end_hour: 22, minute_step: 30 %>
   </p>
 
   <p>

@@ -11,7 +11,7 @@
   <% @reservations.each do |r| %>
     <tr>
       <td></td>
-      <td><%= r.date.to_s %></td>
+      <td><%= r.reservation_date.strftime('%a %d %b %Y, %H:%Mh') %></td>
       <td><%= r.msg %></td>
       <td><%= r.email %></td>
       <td><%= link_to "Mark as Confirmed", r, :notice => "Confirmed!", :method => :delete %>

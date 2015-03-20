@@ -11,14 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316115817) do
+ActiveRecord::Schema.define(version: 20150318142817) do
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "users_id"
+    t.integer "restaurants_id"
+    t.integer "value"
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.string   "email"
-    t.string   "date"
+    t.datetime "reservation_date"
     t.text     "msg"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "restaurant_id"
   end
 
