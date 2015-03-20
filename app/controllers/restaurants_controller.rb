@@ -6,6 +6,8 @@ class RestaurantsController < ApplicationController
       restaurant_id: params[:restaurant_id],
       user_id: current_user.id,
       value: params[:value])
+
+    render text: 'Rating saved!'
   end
 
 
@@ -20,10 +22,12 @@ class RestaurantsController < ApplicationController
   def show
     if user_signed_in?
       @restaurant = current_user.restaurants.find(params[:id])
+
     else
       @restaurant = Restaurant.find(params[:id])
-      @has_rating = Rating.where(restaurant_id: @restaurant.id, user_id: current_user.id).exists?
     end
+    @has_rating = @restaurant.ratings.count > 0
+    @avg_rating = @restaurant.calculate_avg_rating
   end
 
   def new

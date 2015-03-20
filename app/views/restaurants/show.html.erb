@@ -27,6 +27,11 @@
   <%= link_to "rate 5", rate_restaurant_path(@restaurant, 5), class: "rating_btn btn btn_success" %>
 </div>
 <% end %>
+<% if @has_rating %>
+<div>
+  <h5>Restaurant's rating: <%= @avg_rating %></h5>
+</div>
+<% end %>
 
 <div id="map">
   <img src="https://maps.googleapis.com/maps/api/staticmap?size=240x240&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=restaurant%257C996600%7C224<%= @restaurant.full_address %>">

@@ -15,3 +15,19 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+  $('.rating_btn').click(function(e){
+    e.preventDefault();
+    url = $(this).attr('href');
+
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function(data){
+         //$("#ratings").hide();
+         $("#ratings").html(data);
+      }
+    });
+  })
+})
