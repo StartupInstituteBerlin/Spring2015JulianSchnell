@@ -1,4 +1,5 @@
-<table>
+<div class="content">
+<table width="800">
   <tr>
     <td><strong><%= @restaurant.name %></strong></td>
   </tr>
@@ -6,36 +7,43 @@
     <td><%= link_to 'Make a reservation', new_reservation_for_restaurant_path(@restaurant) %></td>
   </tr>
   <tr>
-    <td><strong>Description:</strong></td>
-    <td><%= @restaurant.description %></td>
+    <td width="30%"><center><strong>Description</strong></center></td>
+    <td width="70%"><%= @restaurant.description %></td>
+    <td><div id="map">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?size=240x240&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=restaurant%257C996600%7C224<%= @restaurant.full_address %>">
+    </div></td>
   </tr>
   <tr>
-    <td><strong>Address:</strong></td>
+    <td><center><strong>Address</strong></center></td>
     <td><%= @restaurant.full_address %></td>
   </tr>
   <tr>
-    <td><strong>Phone:</strong></td>
+    <td><center><strong>Phone</strong></center></td>
     <td><%= @restaurant.phone %></td>
   </tr>
 </table>
 
-<% if current_user && !@has_rating %>
-<div id="ratings">
-  <%= link_to "", rate_restaurant_path(@restaurant, 1), class: "rating_btn glyphicon glyphicon-star" %>
-  <%= link_to "", rate_restaurant_path(@restaurant, 2), class: "rating_btn glyphicon glyphicon-star" %>
-  <%= link_to "", rate_restaurant_path(@restaurant, 3), class: "rating_btn glyphicon glyphicon-star" %>
-  <%= link_to "", rate_restaurant_path(@restaurant, 4), class: "rating_btn glyphicon glyphicon-star" %>
-  <%= link_to "", rate_restaurant_path(@restaurant, 5), class: "rating_btn glyphicon glyphicon-star" %>
-</div>
-<% end %>
-<% if @has_rating %>
-<div>
-  <h5>Restaurant's rating: <%= @avg_rating %></h5>
-</div>
+<br><br>
+<div class="ratings">
+<% if current_user && !@has_rating && @restaurant.user_id != current_user.id %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 1), class: "rating_btn glyphicon glyphicon-star", id: "s1" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 2), class: "rating_btn glyphicon glyphicon-star", id: "s2" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 3), class: "rating_btn glyphicon glyphicon-star", id: "s3" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 4), class: "rating_btn glyphicon glyphicon-star", id: "s4" %>
+  <%= link_to "", rate_restaurant_path(@restaurant, 5), class: "rating_btn glyphicon glyphicon-star", id: "s5" %>
 <% end %>
 
-<div id="map">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?size=240x240&markers=icon:http://chart.apis.google.com/chart?chst=d_map_pin_icon%26chld=restaurant%257C996600%7C224<%= @restaurant.full_address %>">
+<% if @has_rating %>
+  <h5>Restaurant's rating: <%= @avg_rating %>/5</h5>
+<% end %>
+
+<% if !@has_rating && @restaurant.user_id == current_user.id %>
+  <h5>No ratings yet!</h5>
+<% end %>
 </div>
+
+<br>
 <%= link_to 'Back', restaurants_path %>
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %>
+<% if current_user && @restaurant.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_restaurant_path(@restaurant) %>
+<% end %>

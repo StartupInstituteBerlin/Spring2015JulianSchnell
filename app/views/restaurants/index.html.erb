@@ -4,20 +4,20 @@
   <%= link_to 'Show all reservations', reservations_path %>
 <% end %>
 
-<table>
+<table width="1000">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
+    <th width="10%">Name</th>
+    <th width="70%">Description</th>
   </tr>
 
   <% @restaurants.each do |r| %>
     <tr>
       <td><%= r.name %></td>
       <td><%= r.description %></td>
-      <td><%= link_to "Show", restaurant_path(r) %></td>
-      <% if current_user %>
-        <td><%= link_to "Edit", edit_restaurant_path(r) %></td>
-        <td><%= link_to "Delete", r, :confirm => "Are you sure?", :method => :delete %></td>
+      <td width="50"><%= link_to "Show", restaurant_path(r) %></td>
+      <% if current_user && r.user_id == current_user.id %>
+        <td width="40"><%= link_to "Edit", edit_restaurant_path(r) %></td>
+        <td width="50"><%= link_to "Delete", r, :confirm => "Are you sure?", :method => :delete %></td>
       <% end %>
 
     </tr>

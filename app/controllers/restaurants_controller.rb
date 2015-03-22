@@ -7,24 +7,24 @@ class RestaurantsController < ApplicationController
       user_id: current_user.id,
       value: params[:value])
 
-    render text: 'Rating saved!'
+    render html: '<div class="fade"><h5>Rating saved!</h5></div>'.html_safe
   end
 
 
   def index
-    if user_signed_in?
-      @restaurants = current_user.restaurants.all
-    else
-      @restaurants = Restaurant.all
-    end
+    # if user_signed_in?
+    #   @restaurants = current_user.restaurants.all
+    # else
+       @restaurants = Restaurant.all
+    # end
   end
 
   def show
-    if user_signed_in?
-      @restaurant = current_user.restaurants.find(params[:id])
-    else
-      @restaurant = Restaurant.find(params[:id])
-    end
+    # if user_signed_in?
+    #   @restaurant = current_user.restaurants.find(params[:id])
+    # else
+       @restaurant = Restaurant.find(params[:id])
+    # end
     @has_rating = @restaurant.ratings.count > 0
     @avg_rating = @restaurant.calculate_avg_rating
   end
