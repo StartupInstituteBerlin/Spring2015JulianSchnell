@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   resources :restaurants
   resources :reservations
   get  '/restaurants/:restaurant_id/reservations/new' => 'reservations#new', as:  :new_reservation_for_restaurant
-  get 'dashboard', to: 'restaurants#index'
+  get 'dashboard', to: 'restaurants#dashboard'
   authenticated :user do
-    root to: 'restaurants#index', as: :authenticated_root
+    root to: 'restaurants#dashboard', as: :authenticated_root
 
   get '/restaurants/:restaurant_id/rating/:value' => "restaurants#rating", as: :rate_restaurant
   end

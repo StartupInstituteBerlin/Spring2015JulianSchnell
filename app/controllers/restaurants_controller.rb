@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy, :dashboard]
 
   def rating
     Rating.create(
@@ -10,22 +10,24 @@ class RestaurantsController < ApplicationController
     render html: '<div class="fade"><h5>Rating saved!</h5></div>'.html_safe
   end
 
+  def dashboard
+      @restaurants = current_user.restaurants.all
+  end
 
   def index
-    # if user_signed_in?
-    #   @restaurants = current_user.restaurants.all
-    # else
-       @restaurants = Restaurant.all
-    # end
+    if current_user && current_user.owner?
+      redirect_to dashboard_path
+      return true
+    end
+    @restaurants = Restaurant.all
   end
 
   def show
-    # if user_signed_in?
-    #   @restaurant = current_user.restaurants.find(params[:id])
-    # else
-       @restaurant = Restaurant.find(params[:id])
-    # end
-    @has_rating = @restaurant.ratings.count > 0
+    @restaurant = Restaurant.find(params[:id])
+    # 2 states needed: for owners&visitors: they are just supposed to see the current rating or "no rating yet!"
+    # and a state for a patron: he should be able to rate, if he did not yet!
+    #@has_rating = @restaurant.ratings.count > 0
+    @has_rating = Rating.where(restaurant_id: @restaurant.id, user_id: current_user.id).exist? #patron rating!
     @avg_rating = @restaurant.calculate_avg_rating
   end
 
@@ -68,4 +70,5 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :description, :full_address, :phone)
   end
+  
 end

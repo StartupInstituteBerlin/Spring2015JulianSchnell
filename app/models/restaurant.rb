@@ -8,6 +8,6 @@ class Restaurant < ActiveRecord::Base
 
   def calculate_avg_rating
     return "N/A" if self.ratings.count == 0
-    self.ratings.sum(:value) / self.ratings.count
+    self.ratings.sum(:value).to_f / self.ratings.count.to_f
   end
 end

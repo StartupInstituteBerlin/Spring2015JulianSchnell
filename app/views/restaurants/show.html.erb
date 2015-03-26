@@ -1,4 +1,10 @@
 <div class="content">
+  <% if current_user && current_user.owner? %>
+    <%= link_to 'Dashboard', dashboard_path %>
+    <%= link_to 'New Restaurant', new_restaurant_path %>
+    <%= link_to 'Show all reservations', reservations_path %>
+  <% end %>
+  <p>
 <table width="800">
   <tr>
     <td><strong><%= @restaurant.name %></strong></td>
@@ -25,7 +31,7 @@
 
 <br><br>
 <div class="ratings">
-<% if current_user && !@has_rating && @restaurant.user_id != current_user.id %>
+<% if current_user_and_patron? && !@has_rating %>
   <%= link_to "", rate_restaurant_path(@restaurant, 1), class: "rating_btn glyphicon glyphicon-star", id: "s1" %>
   <%= link_to "", rate_restaurant_path(@restaurant, 2), class: "rating_btn glyphicon glyphicon-star", id: "s2" %>
   <%= link_to "", rate_restaurant_path(@restaurant, 3), class: "rating_btn glyphicon glyphicon-star", id: "s3" %>
@@ -37,13 +43,13 @@
   <h5>Restaurant's rating: <%= @avg_rating %>/5</h5>
 <% end %>
 
-<% if !@has_rating && @restaurant.user_id == current_user.id %>
+<% if !@has_rating %>
   <h5>No ratings yet!</h5>
 <% end %>
 </div>
 
 <br>
 <%= link_to 'Back', restaurants_path %>
-<% if current_user && @restaurant.user_id == current_user.id %>
+<% if current_user_and_owner? %>
   <%= link_to 'Edit', edit_restaurant_path(@restaurant) %>
 <% end %>

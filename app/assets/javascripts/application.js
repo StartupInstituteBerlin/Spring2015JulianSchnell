@@ -35,9 +35,5 @@ $(document).ready(function(){
   });
   $('.rating_btn').mouseleave(function(){
     $('.rating_btn').css("color", "gray")
-    //$('.rating_btn').slice(0, $('.rating_btn').index(this)+1).css( "color", "gray")
   });
-  //var $star = $('.rating_btn').index(this)
-  //$('.rating')
-  //$('.rating_btn:gt(0):lt($('.rating_btn').index(this))')
 })
