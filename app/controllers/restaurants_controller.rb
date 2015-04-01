@@ -27,7 +27,11 @@ class RestaurantsController < ApplicationController
     # 2 states needed: for owners&visitors: they are just supposed to see the current rating or "no rating yet!"
     # and a state for a patron: he should be able to rate, if he did not yet!
     #@has_rating = @restaurant.ratings.count > 0
-    @has_rating = Rating.where(restaurant_id: @restaurant.id, user_id: current_user.id).exist? #patron rating!
+    if current_user
+      @has_rating = Rating.where(restaurant_id: @restaurant.id, user_id: current_user.id).exists? #patron rating!
+    else
+      @has_rating = @restaurant.ratings.count > 0
+    end
     @avg_rating = @restaurant.calculate_avg_rating
   end
 
@@ -70,5 +74,5 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :description, :full_address, :phone)
   end
-  
+
 end
