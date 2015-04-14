@@ -27,6 +27,11 @@
     <td><center><strong>Phone</strong></center></td>
     <td><%= @restaurant.phone %></td>
   </tr>
+  <tr>
+    <td><center><strong>Logo</strong></center></td>
+    <td><%= image_tag(@restaurant.photo.preview.url) %></td>
+    <td><%= image_tag(@restaurant.photo.thumb) %></td>
+  </tr>
 </table>
 
 <br><br>
